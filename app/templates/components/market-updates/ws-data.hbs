@@ -1,0 +1,12 @@
+{{!yield}}
+
+{{one-way-select
+    value=selectedItem
+    options=displayingItems
+    update=(pipe-action (action (mut selectedItem))
+                        (action "updateSocketSend" selectedItem)
+            )
+}}
+
+<p>{{message}}</p>
+
