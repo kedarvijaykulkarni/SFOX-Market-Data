@@ -10,12 +10,12 @@ export default Component.extend({
   websockets: service(),
   socketRef: null,
   model: null,
-  message: "Connecting...",
+  message: "Please wait connecting...",
 
   displayingItems: computed(function(){
-    return ["Select option", "btcusd", "ltcusd", "ethbtc", "ltcbtc"];
+    return ["btcusd", "ltcusd", "ethbtc", "ltcbtc"];
   }),
-  selectedItem: '',
+  selectedItem: "btcusd",
 
   didInsertElement() {
     this._super(...arguments);
@@ -67,17 +67,23 @@ export default Component.extend({
   myMessageHandler(event) {
     console.log(`Message: ${event.data}`);
     this.set('model', JSON.parse(event.data));
-    this.set('message', this.model.type)
+
+    let sucessMessage = this.model.type === 'success' 
+        ? `Connection ${this.model.type}, please wait data is loading` 
+        : this.model.type;
+
+    this.set('message', sucessMessage)
   },
 
   myCloseHandler(event) {
-    this.set('message', this.model.type)
+    this.set('message', this.model ? this.model.type : 'Error in connection')
     console.log(`On close event has been called: ${event}`);
   },
 
   actions: {
     updateSocketSend(item) {
       // Update the socket send
+    	this.set('message', "Please wait connecting...");
       this.socketRef.send(
         JSON.stringify({
           "type": "subscribe",
