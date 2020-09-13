@@ -52,6 +52,7 @@
     "ember-cli-sass": "^10.0.1",
     "ember-composable-helpers": "^4.3.0",
     "ember-one-way-select": "^4.0.0",
+    "ember-truth-helpers": "^2.1.0",
     "ember-websockets": "^7.2.0",
     "sass": "^1.26.10",
     "tachyons-sass": "^4.9.5"
