@@ -13,9 +13,12 @@ export default Component.extend({
   message: "Please wait connecting...",
 
   displayingItems: computed(function(){
-    return ["btcusd", "ltcusd", "ethbtc", "ltcbtc"];
+    return ["all", "btcusd", "ltcusd", "ethbtc", "ltcbtc"];
   }),
   selectedItem: "btcusd",
+  lastSelectedItem: computed(function(){
+    return ["ticker.sfox.btcusd"];
+  }),
 
   didInsertElement() {
     this._super(...arguments);
@@ -84,10 +87,26 @@ export default Component.extend({
     updateSocketSend(item) {
       // Update the socket send
       this.set('message', "Please wait connecting...");
+      let feeds = item === "all" 
+        ? ["ticker.sfox.btcusd", "ticker.sfox.ltcusd", "ticker.sfox.ethbtc", "ticker.sfox.ltcbtc"]
+        : [`ticker.sfox.${item}`];
+
+      // unsubscribe last feed first 
+      this.socketRef.send(
+        JSON.stringify({
+          "type": "unsubscribe",
+          "feeds": this.lastSelectedItem
+        })
+      );
+
+      // store this for later unsubscribe
+      this.set('lastSelectedItem', feeds);
+
+      // subscribe new feed
       this.socketRef.send(
         JSON.stringify({
           "type": "subscribe",
-          "feeds": [`ticker.sfox.${item}`]
+          "feeds": feeds
         })
       );
     }
