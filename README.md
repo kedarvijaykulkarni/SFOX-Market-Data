@@ -83,6 +83,7 @@ You will need the following things properly installed on your computer.
 * [Google Chrome](https://google.com/chrome/)
 
 ## Code Bbase
+`
   app
     component
       market-updates
@@ -103,7 +104,7 @@ You will need the following things properly installed on your computer.
         miscellaneous
           usd-symbol.hbs
       application.hbs
-
+`
 ## Installation
 
 * `git clone <repository-url>` this repository
