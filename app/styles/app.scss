@@ -1,3 +1,6 @@
+// Tachyons Modules
+@import 'tachyons';
+
 @font-face {
   font-family: 'Roboto Medium';
   font-style: normal;
@@ -84,4 +87,15 @@ nav {
       }
     }
   }
+}
+.outline {
+  border: 1px solid #f4f4f4;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-green {
+  color: green;
 }
