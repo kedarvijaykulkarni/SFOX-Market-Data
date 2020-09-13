@@ -12,15 +12,8 @@ module('Integration | Component | miscellaneous/usd-symbol', function(hooks) {
 
     await render(hbs`{{miscellaneous/usd-symbol}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    let trimmedText = this.element.textContent.trim();
+    assert.ok(trimmedText.includes('USD'));
 
-    // Template block usage:
-    await render(hbs`
-      {{#miscellaneous/usd-symbol}}
-        template block text
-      {{/miscellaneous/usd-symbol}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 });

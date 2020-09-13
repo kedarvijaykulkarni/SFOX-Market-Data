@@ -12,15 +12,12 @@ module('Integration | Component | market-updates/ws-data', function(hooks) {
 
     await render(hbs`{{market-updates/ws-data}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    let trimmedText = this.element.textContent.trim();
+    assert.ok(trimmedText.includes('Please wait connecting...'));
+    assert.ok(trimmedText.includes('USD  0.00000000'));
+    assert.ok(trimmedText.includes('USD  0.00000000 (VWAP)'));
 
-    // Template block usage:
-    await render(hbs`
-      {{#market-updates/ws-data}}
-        template block text
-      {{/market-updates/ws-data}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    // drop down present
+    assert.dom('[data-test-target="drop-dwon"]').exists();
   });
 });

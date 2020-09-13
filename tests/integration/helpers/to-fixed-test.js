@@ -11,7 +11,16 @@ module('Integration | Helper | to-fixed', function(hooks) {
     this.set('inputValue', '1234');
 
     await render(hbs`{{to-fixed inputValue}}`);
+    assert.equal(this.element.textContent.trim(), '1234.0');
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    await render(hbs`{{to-fixed inputValue 2}}`);
+    assert.equal(this.element.textContent.trim(), '1234.00');
+
+    await render(hbs`{{to-fixed inputValue 4}}`);
+    assert.equal(this.element.textContent.trim(), '1234.0000');
+
+    await render(hbs`{{to-fixed inputValue 8}}`);
+    assert.equal(this.element.textContent.trim(), '1234.00000000');
+
   });
 });
