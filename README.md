@@ -83,28 +83,30 @@ You will need the following things properly installed on your computer.
 * [Google Chrome](https://google.com/chrome/)
 
 ## Code Bbase
-`
   app
-    component
-      market-updates
-        ws-data-row.js
-        ws-data.js
-      miscellaneous
-        usd-symbol.js
-    helpers
-      to-fixed.js
-    styles
-      app.scss
-      tachyons.scss
-    templates
-      components
-        market-updates
-          ws-data-row.hbs
-          ws-data.hbs
-        miscellaneous
-          usd-symbol.hbs
-      application.hbs
-`
+    |- component
+    |    |- market-updates
+    |    |   |- ws-data-row.js
+    |    |   |- ws-data.js
+    |    |- miscellaneous
+    |        |- usd-symbol.js
+    |
+    |- helpers
+    |    |- to-fixed.js
+    |
+    |- styles
+    |    |- app.scss
+    |    |- tachyons.scss
+    |
+    |templates
+    |    |- components
+    |    |    |- market-updates
+    |    |    |    |- ws-data-row.hbs
+    |    |    |    |- ws-data.hbs
+    |    |    |- miscellaneous
+    |    |         |- usd-symbol.hbs
+    |    |- application.hbs
+
 ## Installation
 
 * `git clone <repository-url>` this repository
