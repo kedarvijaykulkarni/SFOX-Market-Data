@@ -2,14 +2,20 @@
   {{payload.pair}}
 </div>
 <div class="outline w-30 pa3 mr2">
+  {{#miscellaneous/usd-symbol width="1rem" 
+                              height="1rem"
+                              viewbox="0 0 181 347"}}
+  {{/miscellaneous/usd-symbol}}
   {{to-fixed payload.amount 8}}
 </div>
-<div class="outline w-30 pa3 mr2">
+<div class="outline w-40 pa3 mr2">
+  {{#miscellaneous/usd-symbol}}
+  {{/miscellaneous/usd-symbol}}
   {{to-fixed payload.vwap 8}} <small>(VWAP)</small>
 </div>
 <div class="outline w-10 pa3 mr2">
   {{payload.exchange}}
 </div>
-<div class="outline w-20 pa3 mr2 {{highLowCss}}">
+<div class="outline w-10 pa3 mr2 {{highLowCss}}">
   {{to-fixed highLow 4}}
 </div>

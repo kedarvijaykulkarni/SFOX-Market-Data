@@ -83,7 +83,7 @@ export default Component.extend({
   actions: {
     updateSocketSend(item) {
       // Update the socket send
-    	this.set('message', "Please wait connecting...");
+      this.set('message', "Please wait connecting...");
       this.socketRef.send(
         JSON.stringify({
           "type": "subscribe",
