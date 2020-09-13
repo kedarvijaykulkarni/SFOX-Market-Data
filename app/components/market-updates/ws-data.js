@@ -11,14 +11,64 @@ export default Component.extend({
   socketRef: null,
   model: null,
   message: "Please wait connecting...",
-
-  displayingItems: computed(function(){
-    return ["all", "btcusd", "ltcusd", "ethbtc", "ltcbtc"];
-  }),
+  dropdownDisabled: true,
   selectedItem: "btcusd",
   lastSelectedItem: computed(function(){
     return ["ticker.sfox.btcusd"];
   }),
+
+  /*
+	* for all data one time show 
+  */
+  displayingItems: computed(function(){
+    return ["all", "btcusd", "ltcusd", "ethbtc", "ltcbtc"];
+  }),
+
+  btcusd: computed('model.payload.pair', function() {
+    let data = this.model && this.model.payload && this.model.payload.pair === 'btcusd' 
+                ? this.model.payload
+                : this.btcusdLast;
+    // eslint-disable-next-line ember/no-side-effects                
+    this.set('btcusdLast', data);
+    return data;
+  }),
+
+  btcusdLast: null,
+
+  ltcusd: computed('model.payload.pair', function() {
+    let data = this.model && this.model.payload && this.model.payload.pair === 'ltcusd' 
+                ? this.model.payload
+                : this.ltcusdLast;
+    // eslint-disable-next-line ember/no-side-effects                
+    this.set('ltcusdLast', data);
+    return data;
+  }),
+
+  ltcusdLast: null,
+
+  ethbtc: computed('model.payload.pair', function() {
+    let data = this.model && this.model.payload && this.model.payload.pair === 'ethbtc' 
+                ? this.model.payload
+                : this.ethbtcLast;
+    // eslint-disable-next-line ember/no-side-effects                
+    this.set('ethbtcLast', data);
+    return data;
+  }),
+
+  ethbtcLast: null,
+
+  ltcbtc: computed('model.payload.pair', function() {
+    let data = this.model && this.model.payload && this.model.payload.pair === 'ltcbtc' 
+                ? this.model.payload
+                : this.ltcbtcLast;
+    // eslint-disable-next-line ember/no-side-effects
+    this.set('ltcbtcLast', data);
+    return data;
+  }),
+
+  ltcbtcLast: null,
+
+  /****************** all data ******************/
 
   didInsertElement() {
     this._super(...arguments);
@@ -58,7 +108,9 @@ export default Component.extend({
   },
 
   myOpenHandler(event) {
+    // eslint-disable-next-line no-console
     console.log(`On open event has been called: ${event}`);
+    this.set('dropdownDisabled', false);
     this.socketRef.send(
       JSON.stringify({
         "type": "subscribe",
@@ -68,6 +120,7 @@ export default Component.extend({
   },
 
   myMessageHandler(event) {
+    // eslint-disable-next-line no-console
     console.log(`Message: ${event.data}`);
     this.set('model', JSON.parse(event.data));
 
@@ -80,6 +133,7 @@ export default Component.extend({
 
   myCloseHandler(event) {
     this.set('message', this.model ? this.model.type : 'Error in connection')
+    // eslint-disable-next-line no-console
     console.log(`On close event has been called: ${event}`);
   },
 

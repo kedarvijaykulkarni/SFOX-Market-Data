@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  classNames: ['flex'],
+  classNames: ['flex', 'mb2'],
   highLow: computed('payload.{high,last}', function() {
     return this.payload ? (this.payload.last - this.payload.open) / this.payload.open : 0; 
   }),

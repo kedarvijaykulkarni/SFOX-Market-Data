@@ -6,6 +6,7 @@
         update=(pipe-action (action (mut selectedItem))
                             (action "updateSocketSend" selectedItem)
                 )
+        disabled=dropdownDisabled
     }}
   </div>
   <div class="w-50 pa3 mr2">
@@ -14,5 +15,23 @@
 </div>
 
 
-{{#market-updates/ws-data-row payload=model.payload}}
-{{/market-updates/ws-data-row}}
+{{#if (eq selectedItem "all")}}
+
+  {{#market-updates/ws-data-row payload=btcusd}}
+  {{/market-updates/ws-data-row}}
+
+  {{#market-updates/ws-data-row payload=ltcusd}}
+  {{/market-updates/ws-data-row}}
+
+  {{#market-updates/ws-data-row payload=ethbtc}}
+  {{/market-updates/ws-data-row}}
+
+  {{#market-updates/ws-data-row payload=ltcbtc}}
+  {{/market-updates/ws-data-row}}
+
+{{else}}
+
+  {{#market-updates/ws-data-row payload=model.payload}}
+  {{/market-updates/ws-data-row}}
+
+{{/if}}

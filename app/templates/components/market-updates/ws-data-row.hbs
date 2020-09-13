@@ -2,6 +2,7 @@
   {{payload.pair}}
 </div>
 <div class="outline w-30 pa3 mr2">
+  {{! SVG with sending params}}
   {{#miscellaneous/usd-symbol width="16px" 
                               height="16px"
                               viewbox="0 0 181 347"}}
@@ -9,6 +10,7 @@
   {{to-fixed payload.amount 8}}
 </div>
 <div class="outline w-40 pa3 mr2">
+  {{! SVG with default values}}
   {{#miscellaneous/usd-symbol}}
   {{/miscellaneous/usd-symbol}}
   {{to-fixed payload.vwap 8}} <small>(VWAP)</small>
